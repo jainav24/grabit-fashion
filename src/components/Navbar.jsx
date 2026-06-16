@@ -33,6 +33,12 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  const isHome = location.pathname === '/';
+  const isTransparent = isHome && !isScrolled;
+
+  const textColorClass = isTransparent ? 'text-white' : 'text-primary';
+  const mutedTextColorClass = isTransparent ? 'text-white/80 hover:text-white' : 'text-primary/70 hover:text-primary';
+
   return (
     <>
       <header
@@ -44,7 +50,7 @@ const Navbar = () => {
       >
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-heading font-extrabold tracking-tight text-primary">
+          <Link to="/" className={`text-2xl font-heading font-extrabold tracking-tight ${textColorClass}`}>
             GRABIT<span className="text-accent">.</span>
           </Link>
 
@@ -56,8 +62,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors rounded-xl ${
                   location.pathname === link.path
-                    ? 'text-accent bg-accent/5'
-                    : 'text-primary/70 hover:text-primary hover:bg-gray-100/50'
+                    ? isTransparent ? 'text-white bg-white/10' : 'text-accent bg-accent/5'
+                    : `${mutedTextColorClass} hover:bg-gray-100/20`
                 }`}
               >
                 {link.name}
@@ -67,30 +73,30 @@ const Navbar = () => {
 
           {/* Icons */}
           <div className="flex items-center gap-2">
-            <Link to="/shop" className="hidden sm:flex w-10 h-10 rounded-xl items-center justify-center text-primary/70 hover:text-accent hover:bg-accent/5 transition-all">
+            <Link to="/shop" className={`hidden sm:flex w-10 h-10 rounded-xl items-center justify-center transition-all ${mutedTextColorClass} hover:bg-gray-100/20`}>
               <FiSearch size={20} />
             </Link>
-            <Link to={user ? "/account" : "/login"} className="w-10 h-10 rounded-xl flex items-center justify-center text-primary/70 hover:text-accent hover:bg-accent/5 transition-all">
+            <Link to={user ? "/account" : "/login"} className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${mutedTextColorClass} hover:bg-gray-100/20`}>
               <FiUser size={20} />
             </Link>
-            <Link to="/wishlist" className="relative w-10 h-10 rounded-xl flex items-center justify-center text-primary/70 hover:text-accent hover:bg-accent/5 transition-all">
+            <Link to="/wishlist" className={`relative w-10 h-10 rounded-xl flex items-center justify-center transition-all ${mutedTextColorClass} hover:bg-gray-100/20`}>
               <FiHeart size={20} />
               {wishlist.length > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-accent text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">
+                <span className={`absolute -top-0.5 -right-0.5 text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold ${isTransparent ? 'bg-white text-primary' : 'bg-accent text-white'}`}>
                   {wishlist.length}
                 </span>
               )}
             </Link>
-            <Link to="/cart" className="relative w-10 h-10 rounded-xl flex items-center justify-center text-primary/70 hover:text-accent hover:bg-accent/5 transition-all">
+            <Link to="/cart" className={`relative w-10 h-10 rounded-xl flex items-center justify-center transition-all ${mutedTextColorClass} hover:bg-gray-100/20`}>
               <FiShoppingBag size={20} />
               {getCartCount() > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-primary text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">
+                <span className={`absolute -top-0.5 -right-0.5 text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold ${isTransparent ? 'bg-white text-primary' : 'bg-primary text-white'}`}>
                   {getCartCount()}
                 </span>
               )}
             </Link>
             <button
-              className="md:hidden w-10 h-10 rounded-xl flex items-center justify-center text-primary hover:bg-gray-100 transition-colors"
+              className={`md:hidden w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${textColorClass} hover:bg-gray-100/20`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
