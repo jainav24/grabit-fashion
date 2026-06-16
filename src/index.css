@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0A0A0A;
+  --color-secondary: #ffffff;
+  --color-accent: #4F46E5;
+  --color-background: #F3F4F6;
+  --font-heading: "Syne", sans-serif;
+  --font-body: "Outfit", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-body text-primary bg-background antialiased selection:bg-accent selection:text-white;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+  .glass-dark {
+    @apply bg-black/70 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4F46E5;
+}
+
+/* Swiper custom styles */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #0A0A0A !important;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #4F46E5;
+  color: #ffffff !important;
+  transform: scale(1.1);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 16px !important;
+  font-weight: bold;
+}
